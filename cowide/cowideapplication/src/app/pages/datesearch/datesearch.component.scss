@@ -1,0 +1,31 @@
+.bg-color {
+    background-color: rgb(123, 191, 223);
+    //min-height: 300px;
+  }
+  
+  h2 {
+    font-size: 30px; 
+  }
+  
+  h3 {
+    font-size: 20px; 
+  }
+  .jumbotron {
+   padding: 2rem 1rem;
+   margin-bottom: 0rem;
+  }
+
+  @media screen and (max-width: 600px){
+	
+    h2{
+      font-size: 30px;
+    }
+    
+    hr {
+      margin : 5px;
+    }
+    
+    .adminDashboardCard-title h3 {
+      font-size: 20px;		
+    }
+  }

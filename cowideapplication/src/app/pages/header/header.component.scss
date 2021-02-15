@@ -1,0 +1,33 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.heading{
+    text-align: center;
+    font-size: 40px;
+}
+.clslogo{
+    height:50px;
+    width:150px;
+}
+
+.headers{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 600px){
+    .heading{
+        display: none;
+    }
+
+    .navbar .navbar-brand {
+        display: none;
+    }
+
+    .navbar-expand .navbar-nav {
+        display: flex;
+        flex-direction: column;
+    }
+}

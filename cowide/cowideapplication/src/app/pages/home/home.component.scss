@@ -1,0 +1,115 @@
+.clshomepage{
+    margin: 10px;
+    text-emphasis: inherit;
+    text-align: center;   
+}
+.clsimage{
+    height: 500px;
+    width: 500px;
+}
+
+.bg-color {
+    background-color: azure;
+}
+
+.hero-image {
+    background-image: url("/assets/images/signin1.jpg");                
+    height: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+  
+  .hero-text {
+    text-align: center;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+  }
+
+  .hero-text h1{
+    font-size: 50px;
+}
+
+.hero-text p{
+    font-size: 20px;
+}
+  
+  .hero-text button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 10px 25px;
+    color: black;
+    background-color: #ddd;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .hero-text button:hover {
+    background-color: #555;
+    color: white;
+  }
+
+.container h1 {
+    font-size: 40px;
+}
+
+.container h3 {
+    font-size: 30px; 
+}
+
+.jumbotron {
+   padding: 2rem 1rem;
+   margin-bottom: 0rem;
+}
+
+.news{
+    display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+}
+
+a:link{
+    text-decoration: none;
+}
+
+.clsclose{
+  width: 95px; 
+  font-size: large;
+  font-family: fangsong;
+}
+
+.clsbutton{
+  padding-top: 15px;
+}
+
+.form-group{
+    margin:0px;
+}
+
+@media screen and (max-width: 600px){
+    .container h1 {
+       font-size: 20px;
+    }  
+    
+    .hero-text h1{
+        font-size: 20px;
+    }
+    
+    .hero-text p{
+        display: none;
+    }
+
+    .hero-text {
+        text-align: center;
+        position: absolute;
+        top: 18%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: black;
+      }  
+}

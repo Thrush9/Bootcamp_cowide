@@ -1,0 +1,81 @@
+# Dockerfile has been added in all micro-services, you need to dockerize all micro-services and add docker-compose.yml file
+version: "3"
+
+services:
+  mysql:
+    image: mysql
+    network_mode: host
+    ports:
+      - 3306:3306
+    container_name: sqlcontainer
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_MY_URL: jdbc:mysql://localhost:3306/bootuser?createDatabaseIfNotExist=true&user=root&password=password
+  
+  mongo:
+    image: mongo:3.4-jessie
+    network_mode: host
+    ports:
+      - 27017:27017
+    container_name: mongocontainer
+    environment:
+      MONGO_URL: mongodb://localhost:27017/ustgbootnew   
+  
+  eurekaservice:
+    image: thrushna9/cowide_eurekaservice
+    network_mode: host
+    restart: always
+    container_name: eurekacontainer
+    ports:
+      - 9091:9091
+      
+  zuulservice:
+    image: thrushna9/cowide_zuulservice
+    network_mode: host
+    restart: always
+    container_name: zuulcontainer
+    ports:
+      - 9092:9092    
+      
+  userservice:
+    image: thrushna9/cowide_userservice
+    network_mode: host
+    restart: always
+    container_name: userservicecont
+    depends_on:
+      - mysql
+    ports:
+      - 9093:9093
+   
+  worldservice:
+    image: thrushna9/cowide_worldservice
+    network_mode: host
+    restart: always
+    container_name: worldservicecont
+    depends_on:
+      - mongo
+    ports:
+      - 9094:9094   
+  
+  regionservice:
+    image: thrushna9/cowide_regionservice
+    network_mode: host
+    restart: always
+    container_name: regionservicecont
+    depends_on:
+      - mongo
+    ports:
+      - 9095:9095  
+    
+  cowide:
+    image: thrushna9/cowide
+    restart: always
+    network_mode: host
+    container_name: cowidecont
+    ports:
+      - 8080:8080
+    
+    
+    
+    
+    

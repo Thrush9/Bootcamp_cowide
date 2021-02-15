@@ -1,0 +1,87 @@
+<app-header></app-header>
+<div class="jumbotron jumbotron-fluid" >
+    <div class="worldcases p-2 m-2">
+        <h2>World Cases</h2>
+        <hr>
+        <div class="worldcounts col-sm-12 col-md-12 p-2">
+          <apx-chart *ngIf="BarChartOptions"
+            [series]="BarChartOptions.series"
+            [chart]="BarChartOptions.chart"
+            [dataLabels]="BarChartOptions.dataLabels"
+            [plotOptions]="BarChartOptions.plotOptions"
+            [yaxis]="BarChartOptions.yaxis"
+            [legend]="BarChartOptions.legend"
+            [fill]="BarChartOptions.fill"
+            [stroke]="BarChartOptions.stroke"
+            [xaxis]="BarChartOptions.xaxis"
+            [title]="BarChartOptions.title">
+          </apx-chart>
+        </div>
+    </div>
+    <div class="continentcases p-2 m-2">
+        <h2>Continent Cases</h2>
+        <hr>
+        <mat-card class="col-md-4 col-sm-12 m-2">
+          <div  class="row searchcard">
+            <mat-form-field class="col-md-8 col-sm-12" appearance="fill">
+              <mat-label>Select Continent</mat-label>
+              <mat-select [(ngModel)]="search" name="continent" class="searchdropdown">
+                <mat-option *ngFor="let continent of continents" [value]="continent.value">
+                  {{continent.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="col-md-4 col-sm-12 pull-right mt-3">
+             <button mat-raised-button class="btn pull-right searchbtn" color="primary"
+             (click)="loadContinentData()">Search</button>
+           </div>
+          </div> 
+      </mat-card> 
+        <div class="continentcounts col-sm-12 col-md-12 p-2">
+          <apx-chart *ngIf="chartOptions"
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [xaxis]="chartOptions.xaxis"
+            [stroke]="chartOptions.stroke"
+            [dataLabels]="chartOptions.dataLabels"
+            [yaxis]="chartOptions.yaxis"
+            [labels]="chartOptions.labels"
+            [legend]="chartOptions.legend"
+            [title]="chartOptions.title"
+            [subtitle]="chartOptions.subtitle">
+          </apx-chart>
+        </div>
+    </div>
+    <div class="countrycases p-2 m-2">
+      <h2>Country Cases</h2>
+      <hr>
+      <mat-card class="col-md-4 col-sm-12 m-2">
+        <div  class="row searchcoutrycard">
+          <mat-form-field class="col-md-8 col-sm-12" appearance="fill">
+            <mat-label>Search Country</mat-label>
+            <input matInput [(ngModel)]="searchcountry" name="country" class="searchinput"
+             placeholder="Use Camelcase Format" value="">
+          </mat-form-field>
+          <div class="col-md-4 col-sm-12 pull-right mt-3">
+            <button mat-raised-button class="btn pull-right searchcountrybtn" 
+             color="primary" (click)="loadCountryData()">Search</button>
+          </div> 
+        </div> 
+    </mat-card> 
+      <div class="countrycounts col-sm-12 col-md-12 p-2">
+        <apx-chart *ngIf="ChartOptionsForCountry"
+          [series]="ChartOptionsForCountry.series"
+          [chart]="ChartOptionsForCountry.chart"
+          [xaxis]="ChartOptionsForCountry.xaxis"
+          [stroke]="ChartOptionsForCountry.stroke"
+          [dataLabels]="ChartOptionsForCountry.dataLabels"
+          [yaxis]="ChartOptionsForCountry.yaxis"
+          [labels]="ChartOptionsForCountry.labels"
+          [legend]="ChartOptionsForCountry.legend"
+          [title]="ChartOptionsForCountry.title"
+          [subtitle]="ChartOptionsForCountry.subtitle">
+        </apx-chart>
+      </div>
+  </div>    
+</div>
+<app-footer></app-footer>

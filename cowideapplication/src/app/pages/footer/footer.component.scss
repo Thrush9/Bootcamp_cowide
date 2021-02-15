@@ -1,0 +1,20 @@
+.container-fluid {
+    color : white;
+   // margin-top: 50px;
+}
+
+li{
+  list-style: none;
+  margin: 10px;
+}
+
+h4{
+    margin-top: 10px;
+}
+
+.list-unstyled{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}

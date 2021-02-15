@@ -1,0 +1,29 @@
+image: java:11-jdk
+stages:
+  - test
+  - build
+maven-test:
+  image: maven:3-jdk-11
+  stage: test
+  script: "mvn test"
+maven-build:
+  image: maven:3-jdk-11
+  stage: build
+  script: "mvn package -U"
+  artifacts:
+    paths:
+      - target/*.jar
+services:
+  - 'mongo:latest'
+  - 'mysql:latest'
+  
+variables:
+  MONGO_HOST: localhost
+  MONGO_DATABASE: NewServiceDB
+  MONGO_PORT: 27017
+  MONGO_URL: mogodb://localhost:27017/NewServiceDB
+  MYSQL_HOST: localhost
+  MYSQL_ROOT_PASSWORD: pass
+  MYSQL_PASSWORD: pass
+  MYSQL_DATABASE: bootuser
+  MYSQL_MY_URL: jdbc:mysql://localhost:3306/bootust?createDatabaseIfNotExist=true

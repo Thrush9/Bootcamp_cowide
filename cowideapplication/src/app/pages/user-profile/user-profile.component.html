@@ -1,0 +1,73 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="registration-form">
+        <form [formGroup]="User" class="example-form" >
+            <div class="form-icon">
+                <img class="imageicon" src="/assets/images/profileimage.png">
+            </div>
+            <div class="row">
+                    <mat-form-field class="col-md-6 col-sm-12" appearance="fill">
+                        <mat-label>First Name </mat-label>
+                        <input matInput formControlName="firstName"  placeholder="" value="" >
+                        
+                        <mat-error
+                            *ngIf="User.get('firstName').invalid && User.get('firstName').touched && User.get('firstName').errors.required ">
+                            First Name cannot be <strong>empty</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-6 col-sm-12" appearance="fill">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput formControlName="lastName" placeholder="" value="" >
+                        <mat-error
+                            *ngIf="User.get('lastName').invalid && User.get('lastName').touched && User.get('lastName').errors.required ">
+                            Last Name cannot be <strong>empty</strong>
+                        </mat-error>
+                    </mat-form-field>  
+            </div>
+            <div class="row">
+                    <mat-form-field class="col-md-6 col-sm-12" appearance="fill" >
+                        <mat-label>Email Id</mat-label>
+                        <input matInput formControlName="emailId" placeholder="user@example.com" value="" readonly>
+                        <mat-error
+                            *ngIf="User.get('emailId').invalid && User.get('emailId').touched && User.get('emailId').errors.required ">
+                            Email cannot be  <strong>empty</strong>
+                        </mat-error>
+                        <mat-error *ngIf="User.get('emailId').invalid && User.get('emailId').touched && User.get('emailId').errors.email ">
+                            not valid 
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-6 col-sm-12" appearance="fill">
+                        <mat-label>Phone</mat-label>
+                        <input matInput formControlName="mobileNum" placeholder="" value="" >
+                    </mat-form-field>
+            </div>
+            <div class="row">
+                    <mat-form-field class="col-md-6 col-sm-12" appearance="fill">
+                        <mat-label>Password</mat-label>
+                        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" >
+                        <mat-error
+                            *ngIf="User.get('password').invalid && User.get('password').touched && User.get('password').errors.required ">
+                            password cannot be <strong>empty</strong>
+                        </mat-error>
+                        <mat-error
+                            *ngIf="User.get('password').invalid && User.get('password').touched && User.get('password').errors.minlength && !User.get('password').errors.required ">
+                             Password should  more than <strong>6</strong> characters
+                        </mat-error>
+                    </mat-form-field>
+            </div>
+            <p *ngIf="submitMessage" class="success-message text-center">{{submitMessage}}</p>
+            <div class="form-group text-center">
+                <button mat-raised-button class="btn btn-block create-account" color="primary"
+                 (click)="reset()" >Clear</button>
+                <button mat-raised-button class="btn btn-block create-account" color="primary" id="buttonid"
+                (click)="updateUser()" >Save</button>
+            </div>
+            <!-- <div class="form-group text-center">
+                <p>Already have a account ? <a href="#" routerLink="/login"> Login here </a></p>
+            </div> -->
+        </form>
+    </div>
+</div>
+
+<app-footer></app-footer>
+

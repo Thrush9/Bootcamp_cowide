@@ -1,0 +1,54 @@
+<mat-toolbar color="primary" class="headers" [hidden]="isLoggedIn">
+    <img class="clslogo" src="../assets/images/COWIDE.PNG" (click)="showHome()">
+    <h2 class="heading text-center"><b>COWIDE</b></h2> 
+    <div class="text-center">
+     <button button mat-raised-button color="primary" class="signin mr-2"
+       (click)="showSignin()"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</button>
+    <button button mat-raised-button  class="signup mr-2"
+       (click)="showSignup()"><i class="fa fa-user-plus" aria-hidden="true"></i> Sign Up</button>
+    </div>   
+</mat-toolbar>
+
+
+<nav class="navbar navbar-dark bg-dark navbar-expand " [hidden]="!isLoggedIn">
+    <a href="#" class="navbar-brand" routerLink="/landingpage"> 
+      <img src="assets/images/COWIDE.PNG" class="clslogo"  alt="Logo" />
+    </a>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active" >
+          <a class="nav-link dashboard" href="#" routerLink="/landingpage"><i class="fa fa-tachometer" aria-hidden="true"></i> 
+            Dashboard<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link casehistory" href="#" routerLink="/casehistory"><i class="fa fa-book" aria-hidden="true"></i>
+            Case History</a>
+        </li>
+        <li class="nav-item dropdown dropright" >
+          <a class="nav-link dropdown-toggle analysis" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-pie-chart" aria-hidden="true"></i> Analysis
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#" routerLink="/continentsearch">Continent</a>
+            <a class="dropdown-item" href="#" routerLink="/countrysearch">Country</a>
+            <a class="dropdown-item" href="#" routerLink="/datesearch">Date</a>
+          </div>
+        </li>
+      </ul>
+     
+      <div class="dropdown m-2 my-sm-0">
+          <a class="btn btn-secondary dropdown-toggle account" href="#" role="button" id="dropdownMenuLink" 
+             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <i class="fa fa-user-circle-o" aria-hidden="true"></i> Account
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item profile" href="#" routerLink="/profile">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i> User Profile</a>
+            <a class="dropdown-item signout" href="#" (click)="signOut()">
+                <i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a>
+          </div>
+      </div>
+    </div>
+</nav>     
+

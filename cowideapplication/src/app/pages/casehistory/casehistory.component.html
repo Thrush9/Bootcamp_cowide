@@ -1,0 +1,247 @@
+<app-header></app-header>
+<div class="bg-color p-2">
+    <mat-card class="col-md-10 col-sm-12 searchcard">
+      <div  class="row">
+          <mat-form-field class="col-md-3 col-sm-12" appearance="fill">
+            <mat-label>Search Type</mat-label>
+              <mat-select [(ngModel)]="search" name="type" class="searchdropdown">
+              <mat-option *ngFor="let typ of typeList" [value]="typ.value">
+                {{typ.value}}</mat-option>
+              </mat-select> 
+          </mat-form-field>
+          <mat-form-field class="col-md-3 col-sm-12" appearance="fill">
+            <mat-label>Date</mat-label>
+            <input  [(ngModel)]="datevalue" [value]="" matInput [matDatepicker]="myPicker"  
+            placeholder="date" class="searchdatepicker">
+            <mat-datepicker-toggle  matSuffix [for]="myPicker"></mat-datepicker-toggle>
+            <mat-datepicker #myPicker></mat-datepicker>
+          </mat-form-field>      
+          <mat-form-field class="col-md-3 col-sm-12" appearance="fill">
+            <mat-label>Search Region</mat-label>
+            <input matInput [(ngModel)]="searchName" name="country" class="searchinput"
+             placeholder="Use Camelcase Format" value="">
+          </mat-form-field>
+        <div class="col-md-3 col-sm-12 pull-right mt-3">
+          <button mat-raised-button class="btn pull-right  searchbtn" color="primary" 
+          (click)="getData()">Search</button> 
+        </div>  
+      </div>        
+    </mat-card>
+
+    <div class="col-md-12 col-sm-12 mt-2 mb-2" [hidden]="!isValid">
+      <div class="adminDashboardCard bg-white">
+        <div class="adminDashboardCard-title p-2 m-2">
+              <h3>Search Data : {{find.name}}   {{find.date}}</h3>
+          <hr>
+        </div> 
+        <div class="adminDashboardcard-body">
+          <div class="row"> 
+            <div class="confirmed col-md-3 col-sm-6 part m-auto p-2">
+              <div class="row no-gutters ">
+                <div class="col-3">
+                  <img src="assets/images/confirmed.png" alt="confirmed" class="Cardimage-size" />
+                </div>
+                <div class="col-9">
+                  <div class="pull-right">
+                    <p class="card-text card-text-style">Confirmed Cases</p>
+                    <h4 class="card-title pull-right font-weight-bold" >{{find.confirmed}}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="recovered col-md-3 col-sm-6 part m-auto p-2">
+              <div class="row no-gutters">
+                <div class="col-3">
+                  <img src="assets/images/recovered.png" alt="recovered" class="Cardimage-size" />
+                </div>
+                <div class="col-9">
+                  <div class="pull-right">
+                   <p class="card-text card-text-style">Recovered Cases</p>
+                   <h4 class="card-title pull-right font-weight-bold" >{{find.recovered}}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="deaths col-md-3 col-sm-6 part m-auto p-2">
+              <div class="row no-gutters">
+                <div class="col-3">
+                  <img src="assets/images/death.png" alt="deaths" class="Cardimage-size" />
+                </div>
+                <div class="col-9">
+                  <div class="pull-right">
+                    <p class="card-text card-text-style">Death Cases</p>
+                    <h4 class="card-title pull-right font-weight-bold" >{{find.death}}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+<div class="jumbotron jumbotron-fluid">
+      <div class="worldcases p-2 m-2">
+          <h3>World Cases</h3>
+          <hr>
+          <div class="worldcounts col-sm-12 col-md-12 p-2">
+            <apx-chart *ngIf="BarChartOptions"
+              [series]="BarChartOptions.series"
+              [chart]="BarChartOptions.chart"
+              [dataLabels]="BarChartOptions.dataLabels"
+              [plotOptions]="BarChartOptions.plotOptions"
+              [yaxis]="BarChartOptions.yaxis"
+              [legend]="BarChartOptions.legend"
+              [fill]="BarChartOptions.fill"
+              [stroke]="BarChartOptions.stroke"
+              [xaxis]="BarChartOptions.xaxis"
+              [title]="BarChartOptions.title">
+            </apx-chart>
+          </div>
+        <div class="table-responsive-sm">   
+          <table class="table table-borderless table-striped table-hover worldtable">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col" class="text-center">Date</th>
+                  <th scope="col" class="text-center">Confirmed</th>
+                  <th scope="col" class="text-center">Recovered</th>
+                  <th scope="col" class="text-center">Death</th>
+                  <th scope="col" class="text-center">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of dataList;">
+                  <td scope="col" class="text-center">{{data.date}}</td>
+                  <td scope="col" class="text-center">{{data.confirmed}}</td>
+                  <td scope="col" class="text-center">{{data.recovered}}</td>
+                  <td scope="col" class="text-center">{{data.death}}</td>
+                  <td scope="col" class="text-center">
+                    <i class="fa fa-times" (click)="removeWorldCounts(data)"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>  
+      </div> 
+      <div class="continentcases p-2 m-2">
+          <h3>Continent Cases</h3>
+          <hr>
+          <mat-card class="col-md-4 col-sm-12 searchContinentcard mt-2">
+            <div  class="row">
+                <mat-form-field class="col-md-8 col-sm-12" appearance="fill">
+                  <mat-label>Date</mat-label>
+                  <input  [(ngModel)]="continentDate" [value]="" matInput [matDatepicker]="contDatePicker"  
+                  placeholder="date" class="searchdatepicker">
+                  <mat-datepicker-toggle  matSuffix [for]="contDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #contDatePicker></mat-datepicker>
+                </mat-form-field>      
+              <div class="col-md-4 col-sm-12 pull-right mt-3">
+                <button mat-raised-button class="btn pull-right  searchcontinentbtn" color="primary" 
+                (click)="getContinentData()">Search</button> 
+              </div>  
+            </div>        
+          </mat-card>
+          <div class="continentcounts col-sm-12 col-md-12 p-2">
+            <apx-chart *ngIf="BarChartOptionsForContinent"
+              [series]="BarChartOptionsForContinent.series"
+              [chart]="BarChartOptionsForContinent.chart"
+              [dataLabels]="BarChartOptionsForContinent.dataLabels"
+              [plotOptions]="BarChartOptionsForContinent.plotOptions"
+              [yaxis]="BarChartOptionsForContinent.yaxis"
+              [legend]="BarChartOptionsForContinent.legend"
+              [fill]="BarChartOptionsForContinent.fill"
+              [stroke]="BarChartOptionsForContinent.stroke"
+              [xaxis]="BarChartOptionsForContinent.xaxis"
+              [title]="BarChartOptionsForContinent.title">
+            </apx-chart>
+          </div>
+        <div class="table-responsive-sm"> 
+          <table class="table table-borderless table-striped table-hover continenttable">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col" class="text-center">Continet</th>
+                  <th scope="col" class="text-center">Date</th>
+                  <th scope="col" class="text-center">Confirmed</th>
+                  <th scope="col" class="text-center">Recovered</th>
+                  <th scope="col" class="text-center">Death</th>
+                  <th scope="col" class="text-center">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of continentList;">
+                  <td scope="col" class="text-center">{{data.name}}</td>
+                  <td scope="col" class="text-center">{{data.date}}</td>
+                  <td scope="col" class="text-center">{{data.confirmed}}</td>
+                  <td scope="col" class="text-center">{{data.recovered}}</td>
+                  <td scope="col" class="text-center">{{data.death}}</td>
+                  <td scope="col" class="text-center">
+                    <i class="fa fa-times" (click)="removeRegionCounts(data)"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>  
+      </div> 
+      <div class="countrycases p-2 m-2">
+          <h3>Country Cases</h3>
+          <hr>
+          <mat-card class="col-md-4 col-sm-12 searchCountrycard mt-2">
+            <div  class="row">
+                <mat-form-field class="col-md-8 col-sm-12" appearance="fill">
+                  <mat-label>Date</mat-label>
+                  <input  [(ngModel)]="countryDate" [value]="" matInput [matDatepicker]="countDatePicker"  
+                  placeholder="date" class="searchdatepicker">
+                  <mat-datepicker-toggle  matSuffix [for]="countDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #countDatePicker></mat-datepicker>
+                </mat-form-field>      
+              <div class="col-md-4 col-sm-12 pull-right mt-3">
+                <button mat-raised-button class="btn pull-right  searchcountrybtn" color="primary" 
+                (click)="getCountryData()">Search</button> 
+              </div>  
+            </div>        
+          </mat-card>
+          <div class="continentcounts col-sm-12 col-md-12 p-2">
+            <apx-chart *ngIf="BarChartOptionsForCountry"
+              [series]="BarChartOptionsForCountry.series"
+              [chart]="BarChartOptionsForCountry.chart"
+              [dataLabels]="BarChartOptionsForCountry.dataLabels"
+              [plotOptions]="BarChartOptionsForCountry.plotOptions"
+              [yaxis]="BarChartOptionsForCountry.yaxis"
+              [legend]="BarChartOptionsForCountry.legend"
+              [fill]="BarChartOptionsForCountry.fill"
+              [stroke]="BarChartOptionsForCountry.stroke"
+              [xaxis]="BarChartOptionsForCountry.xaxis"
+              [title]="BarChartOptionsForCountry.title">
+            </apx-chart>
+          </div>
+        <div class="table-responsive-sm"> 
+          <table class="table table-borderless table-striped table-hover countrytable">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col" class="text-center">Country</th>
+                  <th scope="col" class="text-center">Date</th>
+                  <th scope="col" class="text-center">Confirmed</th>
+                  <th scope="col" class="text-center">Recovered</th>
+                  <th scope="col" class="text-center">Death</th>
+                  <th scope="col" class="text-center">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of countryList;">
+                  <td scope="col" class="text-center">{{data.name}}</td>
+                  <td scope="col" class="text-center">{{data.date}}</td>
+                  <td scope="col" class="text-center">{{data.confirmed}}</td>
+                  <td scope="col" class="text-center">{{data.recovered}}</td>
+                  <td scope="col" class="text-center">{{data.death}}</td>
+                  <td scope="col" class="text-center">
+                    <i class="fa fa-times" (click)="removeRegionCounts(data)"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>  
+      </div>    
+</div>    
+
+<app-footer></app-footer>
+

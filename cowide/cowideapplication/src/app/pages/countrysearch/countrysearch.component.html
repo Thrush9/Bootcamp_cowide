@@ -1,0 +1,229 @@
+<app-header></app-header>
+<div class="bg-color p-2">
+
+    <mat-card class="col-md-4 col-sm-12">
+        <div  class="row searchcard">
+          <mat-form-field class="col-md-8 col-sm-12" appearance="fill">
+            <mat-label>Search Country</mat-label>
+            <input matInput [(ngModel)]="search" name="country" class="searchinput"
+             placeholder="Use Camelcase Format" value="">
+          </mat-form-field>
+          <div class="col-md-4 col-sm-12 pull-right mt-3">
+          <button mat-raised-button class="btn pull-right searchbtn" color="primary"
+          (click)="getData()">Search</button>
+        </div> 
+      </div>  
+    </mat-card>
+
+    <div class="card totalcount container-fluid p-4 mt-2" [hidden]="!isValid">
+            <div class="col-md-12 col-sm-12">
+              <h2>{{search}} Cases<span>
+                <button class="btn btn-secondary float-right" (click)="markCountryCounts()">
+                  <i class="fa fa-bookmark-o fa-1x" aria-hidden="true"></i> Mark</button>
+              </span></h2> 
+            </div>    
+          <hr>
+          <div class="row d-flex-row justify-content-around">
+           <div class="confirmedcount col-sm-12 col-md-4">
+               <apx-chart *ngIf="ChartOptionsForConfirmed"
+                   [series]="ChartOptionsForConfirmed.series"
+                   [chart]="ChartOptionsForConfirmed.chart"
+                   [plotOptions]="ChartOptionsForConfirmed.plotOptions"
+                   [labels]="ChartOptionsForConfirmed.labels">
+               </apx-chart>
+           </div>
+           <div class="recoveredcount col-sm-12 col-md-4">
+               <apx-chart *ngIf="ChartOptionsForRecovered"
+                   [series]="ChartOptionsForRecovered.series"
+                   [chart]="ChartOptionsForRecovered.chart"
+                   [plotOptions]="ChartOptionsForRecovered.plotOptions"
+                   [labels]="ChartOptionsForRecovered.labels">
+               </apx-chart>
+           </div>
+           <div class="deathscount col-sm-12 col-md-4">
+               <apx-chart *ngIf="ChartOptionsForDeaths"
+                   [series]="ChartOptionsForDeaths.series"
+                   [chart]="ChartOptionsForDeaths.chart"
+                   [plotOptions]="ChartOptionsForDeaths.plotOptions"
+                   [labels]="ChartOptionsForDeaths.labels">
+               </apx-chart>
+           </div>
+          </div>
+    </div>
+</div>  
+
+    <!-- piecharts and top five-->
+    <div class="jumbotron jumbotron-fluid" [hidden]="!isStateValid">
+        <h2>Data Analysis</h2>
+        <!-- Confirmed Cases -->
+        <div class="confirmed p-2 m-2">
+          <h4>Confirmed Cases</h4>
+          <hr>
+          <div class="row">
+              <!-- <div class="confirmedpie col-sm-12 col-md-6 p-2">
+                <apx-chart *ngIf="PieChartOptionsForConfirmed"
+                  [series]="PieChartOptionsForConfirmed.series"
+                  [chart]="PieChartOptionsForConfirmed.chart"
+                  [labels]="PieChartOptionsForConfirmed.labels"
+                  [responsive]="PieChartOptionsForConfirmed.responsive">
+                </apx-chart>
+              </div> -->
+              <div class="confirmedtree col-sm-12 col-md-8 p-2">
+                <apx-chart *ngIf="TreeChartOptionsForConfirmed"
+                  [series]="TreeChartOptionsForConfirmed.series"
+                  [chart]="TreeChartOptionsForConfirmed.chart"
+                  [dataLabels]="TreeChartOptionsForConfirmed.dataLabels"
+                  [plotOptions]="TreeChartOptionsForConfirmed.plotOptions"
+                  [title]="TreeChartOptionsForConfirmed.title"
+                  [colors]="TreeChartOptionsForConfirmed.colors">
+                </apx-chart>    
+              </div>
+              <div class="confirmedbar col-sm-12 col-md-4 p-2">
+                <apx-chart *ngIf="BarChartOptionsForConfirmed"
+                  [series]="BarChartOptionsForConfirmed.series"
+                  [chart]="BarChartOptionsForConfirmed.chart"
+                  [dataLabels]="BarChartOptionsForConfirmed.dataLabels"
+                  [plotOptions]="BarChartOptionsForConfirmed.plotOptions"
+                  [xaxis]="BarChartOptionsForConfirmed.xaxis"
+                  [title]="BarChartOptionsForConfirmed.title">
+                </apx-chart>    
+              </div>
+          </div>
+        </div>
+    
+        <!-- Recovered Cases -->
+        <div class="recovered p-2 m-2">
+            <h4>Recovered Cases</h4>
+            <hr>
+            <div class="row">
+               <!-- <div class="recoveredpie col-sm-12 col-md-6 p-2">
+                 <apx-chart *ngIf="PieChartOptionsForRecovered"
+                   [series]="PieChartOptionsForRecovered.series"
+                   [chart]="PieChartOptionsForRecovered.chart"
+                   [labels]="PieChartOptionsForRecovered.labels"
+                   [responsive]="PieChartOptionsForRecovered.responsive">
+                 </apx-chart>
+                </div> -->
+                <div class="recoveredtree col-sm-12 col-md-8 p-2">
+                  <apx-chart *ngIf="TreeChartOptionsForRecovered"
+                    [series]="TreeChartOptionsForRecovered.series"
+                    [chart]="TreeChartOptionsForRecovered.chart"
+                    [dataLabels]="TreeChartOptionsForRecovered.dataLabels"
+                    [plotOptions]="TreeChartOptionsForRecovered.plotOptions"
+                    [title]="TreeChartOptionsForRecovered.title"
+                    [colors]="TreeChartOptionsForRecovered.colors">
+                  </apx-chart>    
+                </div>
+                <div class="recoveredbar col-sm-12 col-md-4 p-2">
+                 <apx-chart *ngIf="BarChartOptionsForRecovered"
+                   [series]="BarChartOptionsForRecovered.series"
+                   [chart]="BarChartOptionsForRecovered.chart"
+                   [dataLabels]="BarChartOptionsForRecovered.dataLabels"
+                   [plotOptions]="BarChartOptionsForRecovered.plotOptions"
+                   [xaxis]="BarChartOptionsForRecovered.xaxis"
+                   [title]="BarChartOptionsForRecovered.title">
+                 </apx-chart>   
+                </div>
+            </div>
+        </div>
+
+         <!-- Death Cases -->
+        <div class="death p-2 m-2">
+            <h4>Death Cases</h4>
+            <hr>
+            <div class="row">
+               <!-- <div class="deathspie col-sm-12 col-md-6 p-2">
+                 <apx-chart *ngIf="PieChartOptionsForDeaths"
+                   [series]="PieChartOptionsForDeaths.series"
+                   [chart]="PieChartOptionsForDeaths.chart"
+                   [labels]="PieChartOptionsForDeaths.labels"
+                   [responsive]="PieChartOptionsForDeaths.responsive">
+                 </apx-chart>
+                </div> -->
+                <div class="deathstree col-sm-12 col-md-8 p-2">
+                  <apx-chart *ngIf="TreeChartOptionsForDeaths"
+                    [series]="TreeChartOptionsForDeaths.series"
+                    [chart]="TreeChartOptionsForDeaths.chart"
+                    [dataLabels]="TreeChartOptionsForDeaths.dataLabels"
+                    [plotOptions]="TreeChartOptionsForDeaths.plotOptions"
+                    [title]="TreeChartOptionsForDeaths.title"
+                    [colors]="TreeChartOptionsForDeaths.colors">
+                  </apx-chart>    
+                </div>
+                <div class="deathsbar col-sm-12 col-md-4 p-2">
+                 <apx-chart *ngIf="BarChartOptionsForDeaths"
+                   [series]="BarChartOptionsForDeaths.series"
+                   [chart]="BarChartOptionsForDeaths.chart"
+                   [dataLabels]="BarChartOptionsForDeaths.dataLabels"
+                   [plotOptions]="BarChartOptionsForDeaths.plotOptions"
+                   [xaxis]="BarChartOptionsForDeaths.xaxis"
+                   [title]="BarChartOptionsForDeaths.title">
+                 </apx-chart>
+                </div>
+            </div>
+        </div>      
+     </div>
+
+     <div class="container-fluid country continents bg-color p-4" [hidden]="!isStateValid">
+      <h2>State Analysis</h2> 
+      <div class="col-md-12 col-sm-12 mt-2 mb-2" *ngFor="let stateobj of stateList | paginate: {itemsPerPage:10, currentPage: m}">
+        <div class="adminDashboardCard bg-white ">
+          <div class="adminDashboardCard-title p-2">
+            <h3>{{stateobj.name}}</h3>
+            <hr>
+          </div> 
+          <div class="adminDashboardcard-body">
+            <div class="row"> 
+              <div class="col-md-3 col-sm-6 part m-auto p-2">
+                <div class="row no-gutters ">
+                  <div class="col-3">
+                    <img src="assets/images/confirmed.png" alt="confirmed" class="Cardimage-size" />
+                  </div>
+                  <div class="col-9">
+                    <div class="pull-right">
+                      <p class="card-text card-text-style">Confirmed Cases</p>
+                      <h4 class="card-title pull-right font-weight-bold" >{{stateobj.details.confirmed}}</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 part m-auto p-2">
+                <div class="row no-gutters">
+                  <div class="col-3">
+                    <img src="assets/images/recovered.png" alt="recovered" class="Cardimage-size" />
+                  </div>
+                  <div class="col-9">
+                    <div class="pull-right">
+                     <p class="card-text card-text-style">Recovered Cases</p>
+                     <h4 class="card-title pull-right font-weight-bold" >{{stateobj.details.recovered}}</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 part m-auto p-2">
+                <div class="row no-gutters">
+                  <div class="col-3">
+                    <img src="assets/images/death.png" alt="deaths" class="Cardimage-size" />
+                  </div>
+                  <div class="col-9">
+                    <div class="pull-right">
+                      <p class="card-text card-text-style">Death Cases</p>
+                      <h4 class="card-title pull-right font-weight-bold" >{{stateobj.details.deaths}}</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-6 m-auto p-2 text-center font-weight-bold">
+                <!-- <p>Total countries: {{continent.countries}}</p> -->
+                <p>Death Ratio: {{((stateobj.details.deaths/stateobj.details.confirmed)*100).toFixed(4)}}</p>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pagenumber text-center p-2 m-2">
+        <pagination-controls (pageChange)="m =$event"></pagination-controls>
+    </div>
+  </div>    
+<app-footer></app-footer>

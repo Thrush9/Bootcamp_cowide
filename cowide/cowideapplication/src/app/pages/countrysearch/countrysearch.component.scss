@@ -1,0 +1,80 @@
+.bg-color {
+	background-color: rgb(123, 191, 223);
+	min-height: 300px;
+}
+
+h2{
+    font-size: 40px;
+    margin: 5px;
+    padding: 10px;
+}
+
+h3{
+    font-size: 30px;
+    margin: 5px;
+    padding: 10px;
+}
+
+hr {
+    margin : 0px;
+}
+
+.jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 0rem;
+ }
+ .adminDashboardCard {
+	position: relative;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	min-width: 0;
+	word-wrap: break-word;
+	background-color: #fff;
+	background-clip: border-box;
+	border: 1px solid rgba(0, 0, 0, .125);
+	border-radius: .25rem;
+	 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+     transition: 0.3s;
+}
+
+.adminDashboardCard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.adminDashboardcard-body {
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
+	padding: 1rem;
+}
+
+.Cardimage-size {
+	width: 70%;
+	height: auto;
+}
+
+.part {
+    border : gray 3px solid;
+    border-radius: 5%;
+}
+.pagenumber
+{
+    margin-bottom: 20px;
+  
+}   
+
+@media screen and (max-width: 600px){
+	
+	h2{
+		font-size: 30px;
+	}
+	
+	hr {
+		margin : 5px;
+	}
+	
+	.adminDashboardCard-title h3 {
+		font-size: 20px;		
+	}
+}

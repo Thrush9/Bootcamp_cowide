@@ -1,0 +1,53 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="registration-form">
+        <form [formGroup]="User" class="example-form" >
+            <div class="form-icon">
+                <img class="imageicon" src="/assets/images/profileimage.png">
+            </div>
+            <div class="row">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email Id</mat-label>
+                        <input matInput formControlName="emailId" placeholder="user@example.com" value="">
+                        <mat-error
+                            *ngIf="User.get('emailId').invalid && User.get('emailId').touched && User.get('emailId').errors.required ">
+                            Email cannot be  <strong>empty</strong>
+                        </mat-error>
+                        <mat-error *ngIf="User.get('emailId').invalid && User.get('emailId').touched &&User.get('emailId').errors.emailId ">
+                            not valid 
+                        </mat-error>
+                    </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                    <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"> -->
+                             <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
+                    <!-- </button> -->
+                    <mat-error
+                        *ngIf="User.get('password').invalid && User.get('password').touched && User.get('password').errors.required ">
+                        password cannot be <strong>empty</strong>
+                    </mat-error>
+                    <mat-error
+                        *ngIf="User.get('password').invalid && User.get('password').touched && User.get('password').errors.minlength && !User.get('password').errors.required ">
+                        Password should  more than <strong>6</strong> characters
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <p *ngIf="submitMessage" class="error-message text-center">{{submitMessage}}</p>
+
+            <div class="form-group text-center">
+                <button mat-raised-button class="btn btn-block create-account" color="primary"
+                 (click)="reset()">Clear</button>
+                <button mat-raised-button class="btn btn-block create-account" id="buttonid" color="primary" 
+                (click)="submitLoginData()" >Login</button>
+            </div>
+            <div class="form-group text-center">
+                <p>Need a new account ? <a href="#" routerLink="/registeration"> Register here </a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<app-footer></app-footer>
